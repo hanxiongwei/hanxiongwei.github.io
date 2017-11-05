@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title>
-    Essay_Han Xiongwei
-    
-</title>
+    <title> Introduction_MCTS（未写完） · Essay_Han Xiongwei </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -24,6 +21,8 @@
     <meta name="description" content="学术汪的小本本">
 
 
+
+    <meta name="keywords" content="Tree Search, A*, MCTS, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -208,43 +207,6 @@
         <main class="main" id="main">
             
     
-
-<section class="posts">
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>2017年11月5日</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
-            
-                <a href="/2017/11/05/神经网络学习记录与总结/">神经网络学习历程推荐</a>
-            
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <p>实习部门的研讨会一直在推动Deep Learning的学习，但最近的几次交流学习方向有点被带偏了，故对于这一块的学习我只能按照自己的计划来走了。看资料的过程中，发现内容良莠不齐，故希望借此文章记录自我的学习过程，一方面将精辟的学习资料进行保存，另一方面督促自己对于这一块的进一步学习。</p>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/11/05/神经网络学习记录与总结/#more">
-                    <span class="iconfont icon-right">继续阅读</span>
-                </a>
-            </p>
-        
-        </div>
-        
-    </article>
-    
-
-    
-        
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
@@ -253,68 +215,63 @@
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="/2017/11/01/Introduction-MCTS/">Introduction_MCTS（未写完）</a>
+                Introduction_MCTS（未写完）
             
             </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Tree-Search/">Tree Search</a>
+                    
+                        <a href="/tags/A/">A*</a>
+                    
+                        <a href="/tags/MCTS/">MCTS</a>
+                    
+                    </div>
+                
             
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                
-                    <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>最近在做一个Monte Carlo Tree Search的调研，这几年强化学习的热潮使得该算法大放光彩，我们在Alpha Go与Alpha Zero中也见识了它的强大。这篇总结本着存在必有其原因的思想，刨了下树搜索的发展历史，从发展中探讨MCTS的优点，也算是对自己这段时间调研的一个记录。</p>
-                    
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>最近在做一个Monte Carlo Tree Search的调研，这几年强化学习的热潮使得该算法大放光彩，我们在Alpha Go与Alpha Zero中也见识了它的强大。这篇总结本着存在必有其原因的思想，刨了下树搜索的发展历史，从发展中探讨MCTS的优点，也算是对自己这段时间调研的一个记录。</p>
+<a id="more"></a>
+<h1 id="Tree-Search"><a href="#Tree-Search" class="headerlink" title="Tree Search"></a>Tree Search</h1><p>树搜索模型在MIP、GO、Constructive Algorithm、Search Engine等领域有广泛的应用，这里我把TS总结为如下过程：<br><img src="/2017/11/01/Introduction-MCTS/tree_search_image.jpg" alt="tree-search-introduction-image"></p>
+<blockquote>
+<p>解释：<br>存在一个Search Queue（SQ）储存待探索的节点，根据一定策略，每次选取一个节点进行探索，探索过程中会产生一些新的节点，更新SQ（将产生的新节点插入到SQ中），如此反复，直到满足终止条件。<br>反复操作的结果是搜索树被不断完善，好的Select Strategy能加速搜索到optima的速度，结合剪枝策略（缩小搜索空间），进一步提高搜索效率。</p>
+</blockquote>
+<h2 id="Uninformed-Search"><a href="#Uninformed-Search" class="headerlink" title="Uninformed Search"></a>Uninformed Search</h2><p>Uniformed Search不从环境中获取信息，属于较笨的搜索方式，树搜索中常见的类别有BFS(广度优先搜索)、DFS（深度优先搜索），这里用两张图简要回忆一下这两种搜索方式（序号表示搜索顺序）：<br><img src="/2017/11/01/Introduction-MCTS/bfs_dfs.jpg" alt="Bfs-and-Dfs"></p>
+<h2 id="Informed-Search"><a href="#Informed-Search" class="headerlink" title="Informed Search"></a>Informed Search</h2><p>充分利用环境中的信息，</p>
+
             
-        
-            <p class="content-link">
-                <a href="/2017/11/01/Introduction-MCTS/#more">
-                    <span class="iconfont icon-right">继续阅读</span>
-                </a>
-            </p>
         
         </div>
         
-    </article>
-    
-
-    
-        
-    <article class="post">
-        <header class="post-header">
-            <div class="post-time syuanpi riseIn-light back-1">
-                <span>2017年10月28日</span>
-                
-            </div>
-            <h1 class="post-title syuanpi riseIn-light back-2">
             
-                <a href="/2017/10/28/Introduction-To-Operation-Research/">Introduction To Operation Research（未写完）</a>
             
-            </h1>
-            
-        </header>
-        <div class="post-content syuanpi riseIn-light back-3">
-            
-                
-                    <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>实习部门做的问题主要是供应链方向的优化，包括库存控制、排产调度、装箱装柜、物流优化等等，对于建立好的数学模型，现阶段使用的Solver是GUROBI，小组成员对于其中求解的原理较感兴趣（不至于完全将其当成黑箱使用），介于我是小组中唯一的OR方向（大部分是CS、统计方向），leader希望我对这一块做个详细的调研，并与周三做一次presentation。<br>为了形成体系化的讲解，对单纯形部分的理论知识进行了补充，结合16年暑假跟随华南理工的一位教授学习的MIP solver知识，用一些图将自己的理解形象的表示出来。最后展示效果不错，因此也在这里进行记录与分享。<br>展示内容包含一些我自身对知识的理解，如有错误，请随时提出。</p>
-                    
-            
-        
-            <p class="content-link">
-                <a href="/2017/10/28/Introduction-To-Operation-Research/#more">
-                    <span class="iconfont icon-right">继续阅读</span>
-                </a>
-            </p>
-        
-        </div>
         
     </article>
     
-
-    
-</section>
-    
-    <nav class="pagination">
-        <span class="page-number current">1</span>
+        
+    <nav class="article-page">
+        
+            <a href="/2017/11/05/神经网络学习记录与总结/" id="art-left" class="art-right">
+                <span class="next-title">
+                    神经网络学习历程推荐<i class="iconfont icon-right"></i> 
+                </span>
+            </a>
+        
+        
+            <a href="/2017/10/28/Introduction-To-Operation-Research/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>Introduction To Operation Research（未写完）
+                </span>
+            </a>
+        
     </nav>
+
+        
+    
 
 
         </main>
@@ -392,6 +349,16 @@ $(document).ready(function(){
 })
 </script>
     </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">Introduction_MCTS（未写完）</a></li>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tree-Search"><span class="toc-text">Tree Search</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Uninformed-Search"><span class="toc-text">Uninformed Search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Informed-Search"><span class="toc-text">Informed Search</span></a></li></ol></li></ol>
+        </div>
+    </div>
+
     
     <div class="backtop syuanpi dead toTop" id="backtop">
     <i class="iconfont icon-up"></i>

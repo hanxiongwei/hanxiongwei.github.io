@@ -239,7 +239,11 @@
 <blockquote>
 <p>证明过程看着有点懵，这种从特殊推到一般的形式简直是我的救星（虽然最后还是passing this section）<br>“深度循环网络”计算方式个人认为有点问题，从给定的图片可以看出，layer_index&gt;1的循环层每个神经元应该受三个节点的影响，但是公式的意思仅表示其受两个节点影响，可能是书写错误<br><img src="/2017/11/05/神经网络学习记录与总结/revise_1.jpg" alt="section-5_revise_1"></p>
 </blockquote>
-<h3 id="未看完"><a href="#未看完" class="headerlink" title="未看完"></a>未看完</h3><p><a href="https://zybuluo.com/hanbingtao/note/581764" target="_blank" rel="external">零基础入门深度学习(6) - 长短时记忆网络(LSTM)</a><br><a href="https://zybuluo.com/hanbingtao/note/626300" target="_blank" rel="external">零基础入门深度学习(7) - 递归神经网络</a></p>
+<p><a href="https://zybuluo.com/hanbingtao/note/581764" target="_blank" rel="external">零基础入门深度学习(6) - 长短时记忆网络(LSTM)</a></p>
+<blockquote>
+<p>LSTM被发明出来的原因是因传统的RNN容易发生梯度消失 or 梯度爆炸，因为对参数的训练是沿着梯度的反方向，梯度消失即梯度趋于0，每次训练时，参数基本不发生改变，造成当前时刻输出基本不受长时间间隔的输出影响（几乎无依赖关系），这是不希望看到的；梯度爆炸的解释刚好相反，参数训练时，与当前间隔越长的N，其参数改变值会指数增长，也会阻碍训练过程</p>
+</blockquote>
+<h3 id="未看完"><a href="#未看完" class="headerlink" title="未看完"></a>未看完</h3><p><a href="https://zybuluo.com/hanbingtao/note/626300" target="_blank" rel="external">零基础入门深度学习(7) - 递归神经网络</a></p>
 
             
         

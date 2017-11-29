@@ -236,18 +236,37 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>实习部门做的问题主要是供应链方向的优化，包括库存控制、排产调度、装箱装柜、物流优化等等，对于建立好的数学模型，现阶段使用的Solver是GUROBI，小组成员对于其中求解的原理较感兴趣（不至于完全将其当成黑箱使用），介于我是小组中唯一的OR方向（大部分是CS、统计方向），leader希望我对这一块做个详细的调研，并与周三做一次presentation。<br>为了形成体系化的讲解，对单纯形部分的理论知识进行了补充，结合16年暑假跟随华南理工的一位教授学习的MIP solver知识，用一些图将自己的理解形象的表示出来。最后展示效果不错，因此也在这里进行记录与分享。<br>展示内容包含一些我自身对知识的理解，如有错误，请随时提出。</p>
+                <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p>实习部门做的问题主要是供应链方向的优化，包括库存控制、排产调度、装箱装柜、物流优化等等，对于建立好的数学模型，现阶段使用的Solver是GUROBI，小组成员对于其中求解的原理较感兴趣（不至于完全将其当成黑箱使用），介于我是小组中唯一的OR方向（大部分是CS、统计方向），leader希望我对这一块做个详细的调研，并与周三做一次presentation。<br>为了形成体系化的讲解，对单纯形部分的理论知识进行了补充，结合16年暑假跟随华南理工的一位教授学习的MIP solver知识，用一些图将自己的理解形象的表示出来。最后展示效果不错，因此也在这里进行记录与分享。<br>展示内容包含一些我自身对知识的理解，如有错误，请随时提出。</p>
 <a id="more"></a>
-<h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><blockquote>
-<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><blockquote>
+<h1 id="2-内容"><a href="#2-内容" class="headerlink" title="2.内容"></a>2.内容</h1><blockquote>
+<h2 id="2-1目录"><a href="#2-1目录" class="headerlink" title="2.1目录"></a>2.1目录</h2><blockquote>
 <p>介绍的内容包括六方面：1.线性规划；2.单纯形法；3.Column Generation；4.Bender Decomposition；5.MIP Solver Core；6.GUROBI<br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/content.jpg" alt="content"></p>
 </blockquote>
-<h2 id="线性规划"><a href="#线性规划" class="headerlink" title="线性规划"></a>线性规划</h2><blockquote>
+<h2 id="2-2线性规划"><a href="#2-2线性规划" class="headerlink" title="2.2线性规划"></a>2.2线性规划</h2><blockquote>
 <p>线性规划是凸优化的一种，先来看看凸集与凸优化的定义。<br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt1-3.jpg" alt="part1-3"></p>
 <blockquote>
-<p><strong>凸集</strong>：集合中任意两点连线上的点仍属于该集合，否则为非凸；线性规划的解空间因为是由一个个超平面切分空间得来，故解空间是一个规则的多面体（边缘线性的凸集）。<br><strong>凸优化</strong>：解空间为凸集，且目标函数为线性的优化。<br>凸优化有两条很重要的性质，为单纯形的实现做了铺垫：1.从任意点出发，我们可以在有限步内移动到局部最优点；2.局部最优点即是全局最优点。</p>
+<p><strong>凸集</strong>：集合中任意两点连线上的点仍属于该集合，否则为非凸；线性规划的解空间因为是由一个个超平面切分空间得来，故解空间是一个规则的多面体（边缘线性的凸集）。<br><strong>凸优化</strong>：解空间为凸集，且目标函数为线性的优化。<br>凸优化有两条很重要的性质，为单纯形的实现做了铺垫：a.从任意点出发，我们可以在有限步内移动到局部最优点；b.局部最优点即是全局最优点。</p>
 </blockquote>
-<p>再补充一些运筹学中的基本定义：1.所有的问题都可以转化为标准式；2.系数矩阵A(m*n)满秩，则任意线性无关的m列向量成为基，对应的变量为基变量Xb<br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt1-1.jpg" alt="part1-1"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt1-2.jpg" alt="part1-2"></p>
+<p>再补充一些运筹学中的基本定义：a.所有的问题都可以转化为标准式；b.系数矩阵A(m*n)满秩，则任意线性无关的m列向量成为基B，对应的变量为基变量Xb，余下的列(n\m)构成非基N，对应的变量为非基变量Xn；c.满足所有约束条件的解为可行解，至少违背一条约束的解为非可行解。更多详细的定义可借一本运筹学中文教材参考。</p>
+<p><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt1-1.jpg" alt="part1-1"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt1-2.jpg" alt="part1-2"></p>
+</blockquote>
+<h2 id="2-3Simplex-Method"><a href="#2-3Simplex-Method" class="headerlink" title="2.3Simplex Method"></a>2.3Simplex Method</h2><blockquote>
+<p>凸优化的性质给单纯性法提供了理论基础，这里给一个通俗的解释：线性规划问题的解空间是规则多面体，单纯形法沿着多面体的边移动，每次移动都向着使得目标更优的方向，则有限步内一定可到达局部最优点（全局最优点）。下面的几张slides是关于单纯形法的具体实现与理论证明：</p>
+<p><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt2-1.jpg" alt="part2-1"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt2-2.jpg" alt="part2-2"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt2-3.jpg" alt="part2-3"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt2-4.jpg" alt="part2-4"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt2-5.jpg" alt="part2-5"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt2-6.jpg" alt="part2-6"></p>
+<p>这一部分内容主要参考教材《Introduction to linear programming》2-3章，这里阐述一些通俗的解释：<br>（1）单纯形法沿着多面体的边移动进行优化，每一条边都表示针对当前点的可移动方向。<br>（2）在移动时要保证使得目标更优，但移动过程中，不能违背任一约束条件（保证解依旧在可行域之中），解在沿着多面体的边移动时，当前基变量中的一部分会随着移动而不断减小，当存在一个基变量减小为0时，必须停止移动（继续移动会违背变量大于等于0的约束），此时到达多面体的一个新节点，新加入的变量值大于0，原先的一个变量（不考虑退化情况）值减小为0，这就是单纯形法的换基过程（可参考slide-3中的实例）。<br>（3）通过slide中的推导会发现，我们在线性规划中总是提到的reduced cost就是目标值增量，因此在最小化问题中，希望沿着增量小于0的方向移动；一旦发现某一顶点可移动边的所有增量（reduced cost）都不小于0，则求得最有解，这就是对单纯形法中optimality condition的解释。<br>（4）slide-5对单纯形算法的流程做了描述（based on minimal problem），step1是为算法确定初始解，这一步其实很影响算法效率（在保证搜索开始的点，初始解为基可行解的同时，若其已离optimal很近，效率不高才怪）；step2计算reduced cost，选择reduced cost小于0的方向移动，存在多个rd小于0的方向时，选择策略灵活（reduced cost最小表示沿着该方向移动单位步长，会使得目标降低的更快，故有些教材会建议选取rd最小的方向移动的策略，但reduced cost越小，不代表可移动步长也大，所以才说策略灵活）；step4则是计算沿着优化方向的最大可移动步长，判别依据是移动中所有变量不能小于0。</p>
+</blockquote>
+<h2 id="2-4大规模LP求解"><a href="#2-4大规模LP求解" class="headerlink" title="2.4大规模LP求解"></a>2.4大规模LP求解</h2><blockquote>
+<p>在问题规模上升到移动一定程度后，很多算法的求解效率大幅度降低，此时就会有一大批学者涌入，研究算法如何适配大规模问题，这之中一个很重要的思想就是分解。我们再次考虑LP的模型，明显可知问题规模的增大主要来之两方面：a.变量数目增加；b.约束个数增加，列生成（Column Generation）与切平面（Cutting Plane or Bender Decomposition）就是为解决他们而发明出的。<br>这两个算法单独说理论都要讲好久，故讲解时不谈公式（了解理论前，对单纯形法的推导了解必不可少！），依旧是希望通过通俗的语言来了解它们。抛砖引玉，先给出一张自我总结图：</p>
+<p><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt4-3.jpg" alt="part4-3"></p>
+<h3 id="Column-Generation"><a href="#Column-Generation" class="headerlink" title="Column Generation"></a>Column Generation</h3><p>变量较多时单纯形算法的求解效率明显降低，但存在一些问题就是这么BT，如slide中的cut stock problem，当数学模型建成set cover model时，变量的个数为指数级别。考虑到这类问题约束较少，即约束中行个数m远小于列数n，故求解中，可真对原问题（Master Problem）只取很少一部分变量n1（m &lt; n1 &lt;&lt; n）做单纯形求解（Solve Restricted MP），但在检验optimality condition时，回到原问题，考虑所有n个变量。<br>以最小化问题为例，判断解是否最优的条件为检测所有n个变量的reduced cost是否都不小于0，故此时可构建搜索最小化reduced cost的优化问题（sub-problem），根据rd的计算公式形式可知，sub-problem是一个1D-Knapsack Problem，求解效率较高。当sub-problem的最优值 &gt;= 0，则说明n个变量中reduced cost的最小值都比0大，此时原问题依据单纯形法的最优判断条件，达到最优；若sub-problem的最优值 &lt; 0，说明存在需要继续进基的非基变量，问题求解过程继续。</p>
+<p><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt3-1.jpg" alt="part3-1"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt3-2.jpg" alt="part3-2"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt3-3.jpg" alt="part3-3"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt3-4.jpg" alt="part3-4"></p>
+<p><strong>CG拓展：</strong><br>（1）求解RMP时，可将其转换为对偶问题（虽然RMP相对于MP来说变量数少了很多，但依旧很多，而有证明指出单纯形法求解多约束少变量问题的效率大于多变量少约束问题），对偶问题的解称为单纯形乘子，作为求解sub-prolem目标中的价值系数。<br>（2）MP的变量被分为考虑集N1，非考虑集N2（N2=N\N1），对于检测出来的N2中reduced cost小于0的变量，需进基，但也可设计一定策略，检测N1中不会再进基的非基变量，将其挪到非考虑集N2中，以此预防N1不断增大，求解RMP效率降低的情况发生。<br>（3）每次求解子问题时，可让solver给出几个可行解，对应于一次挪动（从N2到N1）的变量个数大于1，加速收敛过程。<br>（4）……</p>
+<h3 id="Bender-Decomposition"><a href="#Bender-Decomposition" class="headerlink" title="Bender Decomposition"></a>Bender Decomposition</h3><p>约束较多的问题，常见的组合优化问题TSP就是一个。考虑slide中TSP的数学模型，需存在破子环的约束，该类约束的数量级为指数级，证明如下：</p>
+<p><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt4-10.jpg" alt="part4-11"></p>
+<p>故此时可考虑一开始仅纳入一部分约束进行求解（Solve Restricted MP），在检查解的合法性时则带入所有的约束中检查，将候补集中违背的约束加入RMP，如此反复，直到RMP的最优解满足所有约束，则此时sol<em> of MP=sol</em> of RMP。</p>
+<p><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt4-1.jpg" alt="part4-1"><br><img src="/2017/10/28/Introduction-To-Operation-Research/ppt_images/ppt4-2.jpg" alt="part4-2"></p>
+<p><strong>BD拓展：</strong><br>（1）被纳入候选集中的约束应满足约束力较弱，对解的结构会造成影响，但对目标值的影响不明显（若明显影响目标，将其不考虑到RMP内时，RMP的解大概率会违背该约束）；TSP中的破子环约束就类似，存在子环的解与不存在的解中边的个数一样，其明显影响解的结构，对目标值影响不明显。<br>（2）上述TSP模型中，候选集的约束来源于定义，实际求解过程中候选集可被不断更新，根据一定数学转换来形成加入RMP的约束，加速收敛速度，这一块在求解MIP的策略中使用较多，称为cutting plane。<br>（3）BD的思路与CG相似，因本身也是原问题与对偶问题的转换所带来的求解方式的改变，具体的细节可补充下运筹学对偶问题，做更深入的探究。<br>（4）……</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>算法的核心思想————分解（通过将求解一次大规模问题分解为求解若干个小问题的整合）</p>
 </blockquote>
 </blockquote>
 
@@ -357,7 +376,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">Introduction To Operation Research（未写完）</a></li>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#内容"><span class="toc-text">内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性规划"><span class="toc-text">线性规划</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-简介"><span class="toc-text">1.简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-内容"><span class="toc-text">2.内容</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1目录"><span class="toc-text">2.1目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2线性规划"><span class="toc-text">2.2线性规划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3Simplex-Method"><span class="toc-text">2.3Simplex Method</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4大规模LP求解"><span class="toc-text">2.4大规模LP求解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Column-Generation"><span class="toc-text">Column Generation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bender-Decomposition"><span class="toc-text">Bender Decomposition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小结"><span class="toc-text">小结</span></a></li></ol></li></ol></li></ol>
         </div>
     </div>
 

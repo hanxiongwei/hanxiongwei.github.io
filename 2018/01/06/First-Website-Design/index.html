@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title> First Website Design · Essay_Han Xiongwei </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Essay_Han Xiongwei">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="/images/bg_index_1.JPG">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="/images/bg_index_1.JPG">
+
+
+
+    <meta name="description" content="学术汪的小本本">
+
+
+
+    <meta name="keywords" content="Website Design, PHP, MySQL, Bootstrap, Servers Configuration, CMS, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "Essay_Han Xiongwei",
+        author: "Han Xiongwei",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="/images/bg_index_1.JPG">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/A/" style="font-size: 14px;">A*</a> <a href="/tags/Bender-Decomposition/" style="font-size: 14px;">Bender Decomposition</a> <a href="/tags/Bootstrap/" style="font-size: 14px;">Bootstrap</a> <a href="/tags/CMS/" style="font-size: 14px;">CMS</a> <a href="/tags/Column-Generation/" style="font-size: 14px;">Column Generation</a> <a href="/tags/MCTS/" style="font-size: 14px;">MCTS</a> <a href="/tags/MIP-Solver-Core/" style="font-size: 14px;">MIP Solver Core</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Neural-Network/" style="font-size: 14px;">Neural Network</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/Servers-Configuration/" style="font-size: 14px;">Servers Configuration</a> <a href="/tags/Simplex-Method/" style="font-size: 14px;">Simplex Method</a> <a href="/tags/Summary/" style="font-size: 14px;">Summary</a> <a href="/tags/Tree-Search/" style="font-size: 14px;">Tree Search</a> <a href="/tags/Website-Design/" style="font-size: 14px;">Website Design</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">Essay_Han Xiongwei</a></span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>标签</span>
+                    
+                        <span class="menu-item-label">tags</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>文章</span>
+                        
+                            <span class="menu-item-label">article</span>
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>归档</span>
+                        
+                            <span class="menu-item-label">archives</span>
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>标签</span>
+                            
+                                <span class="menu-item-label">tags</span>
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/A/" style="font-size: 14px;">A*</a> <a href="/tags/Bender-Decomposition/" style="font-size: 14px;">Bender Decomposition</a> <a href="/tags/Bootstrap/" style="font-size: 14px;">Bootstrap</a> <a href="/tags/CMS/" style="font-size: 14px;">CMS</a> <a href="/tags/Column-Generation/" style="font-size: 14px;">Column Generation</a> <a href="/tags/MCTS/" style="font-size: 14px;">MCTS</a> <a href="/tags/MIP-Solver-Core/" style="font-size: 14px;">MIP Solver Core</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Neural-Network/" style="font-size: 14px;">Neural Network</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/Servers-Configuration/" style="font-size: 14px;">Servers Configuration</a> <a href="/tags/Simplex-Method/" style="font-size: 14px;">Simplex Method</a> <a href="/tags/Summary/" style="font-size: 14px;">Summary</a> <a href="/tags/Tree-Search/" style="font-size: 14px;">Tree Search</a> <a href="/tags/Website-Design/" style="font-size: 14px;">Website Design</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>关于</span>
+                        
+                            <span class="menu-item-label">about</span>
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">Essay_Han Xiongwei</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>2018年1月6日</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                First Website Design
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Website-Design/">Website Design</a>
+                    
+                        <a href="/tags/PHP/">PHP</a>
+                    
+                        <a href="/tags/MySQL/">MySQL</a>
+                    
+                        <a href="/tags/Bootstrap/">Bootstrap</a>
+                    
+                        <a href="/tags/Servers-Configuration/">Servers Configuration</a>
+                    
+                        <a href="/tags/CMS/">CMS</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <p>这是我第一次一个人单独设计并开发一个网站，需求来源大致是研究生团队的老师们希望能拥有一个团队展示平台，用以对外宣传。而调研中发现外包的费用较高，就在群里询问是否有学生感兴趣，刚好那段时间所写论文的实验结果一直难以有提升，并想到本科时用C#独立开发过一个信息系统，就揽下了这活儿，赚点外快，却没想到前前后后还是很多坑，但最后还是坚持的落实了需求。虽然我自己后来的发展方向也不与信息系统相关，但这份经历算是我17年的成果之一，故借此机会，对其好好做个总结。对于一个之前从未接触PHP、MySQL的我来说，心中的信念就是“逢山开路，遇水搭桥！”亦或是“知知为知知，不知百度知，百度不知谷歌知！”这份总结我也会分享很多技术干活，相信阅读完后对搭建系统就不再那么神秘了。</p>
+<a id="more"></a>
+<h1 id="系统介绍"><a href="#系统介绍" class="headerlink" title="系统介绍"></a>系统介绍</h1><p>既然要吹牛逼，当然是先上图，网站链接是<a href="http://msor-world.com/" target="_blank" rel="external">HUST OI Team</a>，因开发时间零散，故两个多月才完成交付。系统的前、后台界面如下（因为网站采用响应式前端框架，手机上浏览界面更佳！）：</p>
+<p><img src="/2018/01/06/First-Website-Design/front_page.png" alt="The front page of website"></p>
+<p>后台界面是方便管理员管理网站信息的（成员、新闻、成果等）</p>
+<p><img src="/2018/01/06/First-Website-Design/behind_page.png" alt="The behind page of website"></p>
+<p>用一句话来描述我开发的网站：“搭建了一套基于Bootstrap+PHP+MySQL的响应式CMS”</p>
+<blockquote>
+<p><strong>补充：</strong>很多人可能会对网站与系统的概念难以区分，这里给出我的理解：大框架上两者同质，但网站更偏重于UI，而系统则偏重于后台的逻辑处理。很多人概念模糊可能是网站与网页的该概念较模糊，很多开发公司在招聘时，会将程序猿区分为前端开发与后台开发，前者侧重于UI侧（B/S架构中就是静态页面设计），后者侧重于逻辑侧（与DB对接），如果一个系统能很好的做到前、后台分离，则可称作CMS（Content Management System）</p>
+</blockquote>
+<h1 id="网站开发"><a href="#网站开发" class="headerlink" title="网站开发"></a>网站开发</h1><p>对整个网站的开发过程如下：</p>
+<p><img src="/2018/01/06/First-Website-Design/开发流程图.jpg" alt="流程图"></p>
+<h2 id="前端页面设计"><a href="#前端页面设计" class="headerlink" title="前端页面设计"></a>前端页面设计</h2><p>本科时玩过计算机设计大赛（网站设计），所以对前端并不陌生，但不得不感慨开源前端框架的发展对这一块便利性的贡献，特别是那种对编码有高度强迫症的人（咳咳，不是我不是我）。开发中，我不需要再写大量的css来实现布局，为了一个动态效果也不用再去对js、jQuery研究太深入，因为开源者已经帮我们完成封装。<br><a href="http://www.bootcss.com/" target="_blank" rel="external">Bootstrap</a>是一套扁平化前端框架，栅格化的理念让其自动拥有友好的响应式功能，新手可以通过<a href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html" target="_blank" rel="external">Boostrap3介绍</a>快速入门，有具体需求时候再参考官网的说明文档即可。<br>到这一步，前端开发仍不太友好，bootstrap虽减少了底层工作的实施，但缺乏艺术细菌的人，要搭建静态页面还是十分困难，因此我采用的办法就是down一个别人基于H5、bootstrap写好的开源静态网站（Demo可参考<a href="http://www.youzhan.org/" target="_blank" rel="external">Bootstrap优站精选</a>），在此基础上调整样式、修改细节（这一部分还是需要开发者对前端知识有部分了解）；同时，bootstrap官网也提供了大量被进一步封装的插件可供使用。</p>
+<blockquote>
+<p><strong>补充：</strong>网站中“团队新闻”、“科研成果”板块的表格布局及翻页功能是我自己用js实现的，花了些时间在逻辑设计上（如：处于第一页时，向前翻页的button应失效，但其他时候皆可点击等，这些后期结合Ajax与后台传输数据时逻辑会更复杂），是一个比较痛苦的过程，附上部分代码：</p>
+<p><img src="/2018/01/06/First-Website-Design/table分页功能实现1.jpg" alt="自己实现table分页功能"></p>
+<p>但在做网站后台页面设计时，偶然发现一个开源table框架，仅需在js中为table调用即可实现分页、查找等功能，那时叫一个郁闷！</p>
+<p><img src="/2018/01/06/First-Website-Design/table分页功能实现2.jpg" alt="自己实现table分页功能"></p>
+</blockquote>
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><p>数据库设计分为<strong>概念设计</strong>、<strong>逻辑设计</strong>及<strong>物理设计</strong>，<strong>概念设计</strong>主要指E-R图（实体关系图），记得以前老师总说，读完信管专业出去不会画E-R图，等于白学，我大概就处于白学的边缘。具体的设计规则不难，想学习的同学借一本《管理信息系统》查阅即可，这里直接上图：</p>
+<p><img src="/2018/01/06/First-Website-Design/E-R图.png" alt="实体联系图"></p>
+<p><strong>逻辑设计</strong>上，因为我采用的是关系型数据库，工作即是将E-R图映射成有关联的二维表（关系表），这里不予叙述。</p>
+<p><strong>物理设计</strong>即设计到操作层面了，本科时在接触DBMS（Database  Management System）时，用的是微软的Sql Server，不得不说它对小型网站开发不太友好，光软件就几个G，很多功能基本用不到，所以果断放弃。总听朋友说MySQL不错，轻量级（方便部署）且开源，就果断选择了。<br><a href="https://www.mysql.com/" target="_blank" rel="external">MySQL官网</a>，从这里可以下载，安装步骤也不复杂，具体操作可根据自己的系统，自行百度“MySQL安装教程”参考即可。安装成功后，数据库中关系表的构建这里就不累述了。<br>从这里开始，就需要对SQL语句有一定了解了，用户也可参考<a href="http://www.runoob.com/sql/sql-tutorial.html" target="_blank" rel="external">SQL介绍</a>学习，按需了解基本操作即可。</p>
+<blockquote>
+<p><strong>补充：</strong>MySql只是一种服务，安装成功仅表示你可以使用这项服务（数据的存储、操作——连接、增删查改等），使用时记得要先开启服务。<br>若每一张表都用SQL语句去操作显得十分繁琐了，通常的操作是表格的创建用可视化界面完成，后期增删查改操作涉及用户交互，所以用SQL操纵。在官网下载MySQL时，会自带一个可视化操作软件，个人认为及其难用，这里推荐Navicat，小清新的风格是我的菜。</p>
+<p><img src="/2018/01/06/First-Website-Design/navicat.jpg" alt="Navicat"></p>
+</blockquote>
+<h2 id="后台开发"><a href="#后台开发" class="headerlink" title="后台开发"></a>后台开发</h2><p>后台开发中，我选的语言是PHP，当时做选择时候我权衡了好久，Emmmmmm…</p>
+<blockquote>
+<p><strong>补充：</strong><br><strong>C#：</strong>本科时我用C#较多，C#虽具有高便利性（是真的方便！本机上的服务器环境自动部署好，且很多表单控件被封装的较完善），但也正因此，他的弊端是低灵活性。如：表单控件的样式可能与自设计样式发生冲突、Ajax控件真心难用（自己写的话则不如用其他语言）、出bug时调试过程更繁琐等。当然，最主要的原因还是开发要下Visual Studio，随随便便又是几个G，abandon！<br><strong>JSP：</strong>java我比较熟悉（因为当时团队研究要求用java实现），但JSP没怎么接触，本科有一个室友的毕业设计是用JSP实现的，一想到当时他寂寞的抽一口烟再写几行代码的场景，我也放弃了。<br><strong>PHP：</strong>PHP+MySQL在当时算是比较好的结合了，虽然自己未曾接触过，但还是本着信念，想去尝试下，故花一天时间看完了菜鸟教程对PHP的<a href="http://www.runoob.com/php/php-tutorial.html" target="_blank" rel="external">介绍</a>，就直接上手实干了。<br><strong>其他：</strong>本是想着用Python，当时正好Python也是较热门的语言之一，但有人说Python对后台开发没PHP友好，毕竟在最初设计出来时主要面向的是数据分析需求，故没选。但实习部门有人用Python写后台体验还不错，所以后期若想尝试，Python也是一个不错的选择。另一个就是Nodejs，这是现在一位专写前端的同事推荐的，有兴趣的可以尝试下。</p>
+</blockquote>
+<p>很多人对后台语言存在恐惧心理（很多人就是本科时的我，哈哈），觉得专业课中的java、c等逻辑知识根本用不上，但其实理解了其原理后，才发现都是相通的。<br>这里给出我的理解：后台开发的处理逻辑与上课时的内容无异（顺序、选择、循环等），熟练的开发者也会设计良好的数据结构加速处理效率，需要补充的知识仅是其与前端界面、DB的数据传输工作。<br><strong>前端与后台的数据传输：</strong>主要形式分为两种，一种是同步传输（Synchronous Transmission），PHP中这种形式较简单，缺点是每次提交任务都要全局刷新界面，开销大且不友好，做法是将写好的html文件后缀改为php，即可在代码中添加php脚本“&lt;?php code ?&gt;”，此时php可根据form-name或者id来接收信息并做处理。另一种是异步传输（Asynchronous Transmission），用到的技术是Ajax，可实现界面局部刷新，关于Ajax的学习可以参考<a href="http://www.runoob.com/ajax/ajax-asp-php.html" target="_blank" rel="external">这里</a>，此时页面数据通过js传输给后台处理文件，再接收处理完成的结果，做到了展示与处理完全分离，这里展示一段实现时涉及的代码。</p>
+<p><img src="/2018/01/06/First-Website-Design/php-html.jpg" alt="Php-html"></p>
+<p><img src="/2018/01/06/First-Website-Design/ajax-jquery.jpg" alt="Ajax-jquery"></p>
+<blockquote>
+<p><strong>补充：</strong>Ajax是一门强大且方便使用的技术，jQuery作为js的封装，也对ajax的调用做了完善，主要使用的函数是.post()与.get()，ajax函数的返回格式一般采用json，学过python的童鞋可以将其理解为字典；对json中的数据用html标签及css进行封装，即可达到很棒的交互，网站中“团队新闻”、“科研成果”板块即采用这项技术，页面的后缀仍是html，供大家参考。这里铺上一张对ajax返回的json数据进行解析，形成网页的代码，图中data为ajax传回的json数据。</p>
+<p><img src="/2018/01/06/First-Website-Design/ajax-json-html.jpg" alt="Ajax-json-html"></p>
+<p><strong>补充：</strong>说到后台开发，不得不提的一个问题就是开发环境配置。这里先花一点时间理解下我们平时上网的内流程，当我们使用设备（电脑 or 手机等，简称A）浏览一个网站时，涉及到的请求都要发送给服务器（可理解为远端的电脑，简称B），服务器根据请求进行操作，再将数据返回，A的浏览器则解析返回的数据（这里的数据指被解析后的html标签、css等），从而进行展示。<br>当我处于开发阶段时，还未租用服务器，所以要做的工作就是让我的笔记本既成为A，又成为B。通常情况下，作为A的环境很容易，浏览器都有封装好，所以我们在写静态界面时候，可直接用浏览器运行并展示；后者则需要下载软件部署，正常的操作是百度搜索“Apache+MySQL+PHP开发环境部署”，但因过程十分繁琐，一直认为“学习死于配置”的我果断找到了更方便的方式，那就是<a href="http://www.wampserver.com/" target="_blank" rel="external">WAMPSERVER</a>，一键部署好本机环境。就这样，我在本机上能很方便的进行调试。</p>
+</blockquote>
+<p><strong>后台与数据库的数据传输：</strong>搭建网站时，使用的DBMS是MySQL，所以这一块我使用的是“mysqli”，具体的学习可点击<a href="http://www.runoob.com/php/php-mysql-intro.html" target="_blank" rel="external">这里</a>，它PHP中已封装好的对象，直接调用即可，传入的对象是SQL语句，mysqli将SQL传入DB执行，并返回执行结果。继续附图：</p>
+<p><img src="/2018/01/06/First-Website-Design/mysqli1.jpg" alt="Mysqli1"></p>
+<p><img src="/2018/01/06/First-Website-Design/mysqli2.jpg" alt="Mysqli1"></p>
+<h2 id="服务器部署"><a href="#服务器部署" class="headerlink" title="服务器部署"></a>服务器部署</h2><p>网站开发工作结束后，面临的工作就是部署在服务器端，简单的理解就是把写完的所有代码copy到一台可供左右人访问的电脑上，正所谓好东西要学会共享。但困难的理解就包括：<strong>服务器租赁</strong>、<strong>服务器环境部署</strong>、<strong>域名申请</strong>、<strong>域名解析</strong>…停，我们一一来理解。</p>
+<p><img src="/2018/01/06/First-Website-Design/hold-on-example.jpg" alt="举个栗子"></p>
+<p>举个简单的栗子，当我们访问百度时，通常操作是在浏览器中输入域名“www.baidu.com”，实质中，万维网会根据这个域名解析成一个IP地址“XXX.XXX.XXX.XXX”，这个IP地址又和远端的一台计算机唯一匹配，所以我们的访问请求最终是传送到远端计算机中，该计算机根据请求返回请求结果，浏览器解析后展示给成网页。</p>
+<p>我要做的事情与这个过程一样，第一步就是<strong>租赁服务器</strong>（买不起我还租不起吗？），网站部署中对服务器性能主要看重的是硬盘容量与带宽（流量），CPU、GPU、内存等主要是针对高计算量服务，不用太高配置；考虑到网站的访问需求不会太高，故选择了阿里云的最低配服务器（系统是Windows Server 2008），当时一年的价格大概是1100左右，随着云计算的发展，现在可能有一定涨幅。当时主要是对Linux不熟悉，所以系统选择了Windows，但这里建议还是选Linux更好，因为才Windows上装软件、配环境会繁琐的多。</p>
+<p>前面提到，服务器与一个IP地址绑定，此时我们可以通过IP地址来访问这一台电脑（建议使用Windows下自带软件“远程桌面连接”来连接远程Windows服务，较友好），接下来要做的事情就是让访问请求送到我们所写的代码中进行处理，从而可以返回超文本标记语言（网页代码）——<strong>服务器环境部署</strong>。</p>
+<p><img src="/2018/01/06/First-Website-Design/connection.jpg" alt="远程桌面连接"></p>
+<p>这一块的配置确实很麻烦，所以一开始我想到一个捷径，服务器和我自己的电脑都是Windows系统，那直接在上面也装一个WAMPSERVER不就都搞定了吗？但结果不如人意，安装成功后，一旦开启WAMPSERVER，整个服务器就会卡死（至今仍存有疑惑，配置太低？ or WAMPSERVER本身不支持服务器系统），故放弃。之后只有尝试一步步安装Apache、MySQL及PHP，后两者较成功，但Apache的安装总显示失败，于是我的配置组合变成了IIS+PHP+MySQL，虽然组合较奇怪，但仍算是完成了配置工作（后来查询的资料是Apache+PHP+MySQL环境在Linux下会友好的多）。之后的工作就是将代码拷贝到服务器上，并配置端口到8080即可（通过IP地址访问时，默认的端口号）。</p>
+<blockquote>
+<p><strong>补充：</strong>配置环境中的很多细节被我省略了，需要提醒的是在Windows下环境变量的设置，软件（Apache、PHP、MySQL等）中一般自身包含一个配置文件.inf，里面的内容也需要修改的也很多，具体的细节还是碰到了直接度娘，这里仅作提醒。</p>
+<p><strong>补充：</strong>如果购买的服务器系统是Windows时，IIS是需要提前配置的，方便期间，可以在阿里云中搜索Windows Server一键配置包，下载后next到底即可，省去了自己为计算机开启服务的繁琐操作，阿里云的服务化在国内的云供应商中做的还不错。</p>
+<p><img src="/2018/01/06/First-Website-Design/aliyun-config.jpg" alt="阿里云"></p>
+</blockquote>
+<p>完成了前两步，就剩下最后的<strong>域名申请</strong>与<strong>域名解析</strong>了，这一块可直接从阿里云控制台中跳转，域名的申请存在较长的审核周期，建议可提前落实该步骤，因操作官网都有详细说明，这里就不重复提了。</p>
+<blockquote>
+<p><strong>补充：</strong>提一个有意思的现象，这个设想产生的原因是有另一个老师看我做的网站还不错，也提了需求。我的第一反应就是，能否公用一个服务器，申请不同的域名，每个域名对应该服务器的不同端口即可。本着这种设想，我的尝试最终还是失败了，原因是域名在解析时不能解析到带端口的IP地址（这样解释也合乎情理，毕竟可行的话，那云提供商的利润不得大大缩水），之后也一直没想这个事。直到有一次和同事聊到这个需求，他给了一个很赞的建议，即访问时，使用的域名应该也会作为信息传送到服务器，那么可让index页面（被访问时的第一个页面）中写一个判断语句即可，若为XX域名，则跳转至XX界面，可达到同一服务器部署多网站的目的，有才！</p>
+</blockquote>
+<h2 id="系统测试"><a href="#系统测试" class="headerlink" title="系统测试"></a>系统测试</h2><p>测试是系统开发中较为重要的一步，由于我对文档的整理要求较高，因此测试工作返回的内容结构化较好，且能快速定位，我也方便修改，具体的细节这里就不叙述了，只是强调下文档工作的重要性。</p>
+<h2 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h2><h3 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h3><p>安全方面，我在网站开发中主要做了两方面工作：一是防SQL恶意注入，用到函数htmlspecialchars()，使用者在表单中输入的SQL会被解析中html的特殊字符，具体的细节可以参考网上的资料。另一个工作则是对session的控制，后台界面中，我令session具有一定的存活周期，长时间不操作后再登陆时会提示需重新输入用户名及密码；同时，还阻止异常登陆情况的发生（即跳过用户名、密码输入界面访问），上图！</p>
+<p><img src="/2018/01/06/First-Website-Design/session.jpg" alt="Session"></p>
+<h3 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h3><p>视频的展示，我直接使用H5的video标签，使用起来十分方便，需要注意的是记得在服务器IIS中配置好MIME，具体的介绍可参考<a href="http://blog.163.com/junhe999@126/blog/static/19318021201261743647379/" target="_blank" rel="external">常用MIME类型</a></p>
+<h3 id="统计访问量"><a href="#统计访问量" class="headerlink" title="统计访问量"></a>统计访问量</h3><p>网站中做了一个访问量统计功能，将主页拉到最下面可看到。不过这里只算半个实现，浏览时刷新界面也会使得访问量加1（就不提网站刚上线时，我默默在主页上按F5不动的经历了），实际中实现时还是应该用脚本判断两次浏览是否来自同一IP地址，并给出逻辑：一定时间内同一IP地址的多次访问只记一次访问量，实现起来应该不难，留给大家去实现，这里贴上半个实现的代码：</p>
+<p><img src="/2018/01/06/First-Website-Design/count.jpg" alt="Count"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个项目进展之初觉得不会太困难，但开发过程中对各种新知识的懵圈却很磨人，身边几乎找不到交流的同学，任何知识都靠自学。但不得不说，这个过程锻炼了我的毅力，让我面对陌生的实物不再那么恐惧，还是那句话：“逢山开路，遇水搭桥~”<br>等到网站做完，看着自己整理的总结文件夹，成就感小爆炸，那么又到了直接上图的时候了！</p>
+<p><img src="/2018/01/06/First-Website-Design/doc-demand.jpg" alt="Count"></p>
+<p><img src="/2018/01/06/First-Website-Design/doc-code.jpg" alt="Count"></p>
+<blockquote>
+<p><strong>补充：</strong>网站构建的代码放到了我的github中，在开发php时使用的编译器是PhpStorm（编译器类型众多，按喜欢的风格选就好）</p>
+</blockquote>
+
+            
+        
+        </div>
+        
+            
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2017/11/05/神经网络学习记录与总结/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>神经网络学习历程推荐
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/hanxiongwei" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>1970 ~ 2018</span>
+        <span>❤</span>
+        <span>Han Xiongwei</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">First Website Design</a></li>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#系统介绍"><span class="toc-text">系统介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#网站开发"><span class="toc-text">网站开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前端页面设计"><span class="toc-text">前端页面设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据库设计"><span class="toc-text">数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后台开发"><span class="toc-text">后台开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#服务器部署"><span class="toc-text">服务器部署</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统测试"><span class="toc-text">系统测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他功能"><span class="toc-text">其他功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安全"><span class="toc-text">安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#视频"><span class="toc-text">视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#统计访问量"><span class="toc-text">统计访问量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>

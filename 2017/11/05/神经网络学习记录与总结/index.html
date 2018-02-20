@@ -254,6 +254,25 @@
 <p><img src="/2017/11/05/神经网络学习记录与总结/mnist_1.jpg" alt="Mnist_code"></p>
 <p><strong>画图</strong><br>下载的数据都是binary值，不够直观，所以我接触数据的第一件事就是把它画出来，画灰度图的方式还是很简单，这里仅提供记录即可。<br>用numpy把数据reshape成28*28的格式，再调用pyplot中的imshow()即可，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line">train_df = pd.read_csv(<span class="string">'dara/train.csv'</span>)</div><div class="line">train = train_df.values <span class="comment"># Numpy representation of NDFrame</span></div><div class="line"></div><div class="line">img_rows, img_cols = <span class="number">28</span>, <span class="number">28</span></div><div class="line">trainX = train[:, <span class="number">1</span>:].reshape(train.shape[<span class="number">0</span>], img_rows, img_cols)</div><div class="line"></div><div class="line">plt.imshow(trainX[img_id], cmap = plt.cm.gray) <span class="comment"># 灰度图</span></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<h1 id="3-公开课"><a href="#3-公开课" class="headerlink" title="3.公开课"></a>3.公开课</h1><p>前两章的内容将我领进了Deep Learning这个神秘世界，我学东西的特点是先消除神秘感，再系统性的学习内容，一方面提高学习效率，另一方面也能消除我看教材时有种打开英语课本第一页的心情。</p>
+<p>对比了一些公开课与教程，我最终选择了Stanford的<a href="http://cs231n.github.io/" target="_blank" rel="external">Convolutional Neural Network for Visual Recognition</a>，课程的前半部分也对Machine Learning的一些基础知识做了回顾，让我对之前的一些黑盒式理解也更加清晰。</p>
+<blockquote>
+<p>学习方式：介于视频是全英文授课，所以我是先看完GitHub上的课件，再看公开课进行补充。福利是原课程的视频被人copy到B站上了<a href="https://www.bilibili.com/video/av13260183/" target="_blank" rel="external">（无字幕版）</a>，有雷锋同志也翻译出了字幕版<a href="https://www.bilibili.com/video/av17204303" target="_blank" rel="external">（有字幕版）</a>。</p>
+</blockquote>
+<h2 id="3-1-学习笔记1——正则化"><a href="#3-1-学习笔记1——正则化" class="headerlink" title="3.1 学习笔记1——正则化"></a>3.1 学习笔记1——正则化</h2><p>官方解释：在Loss Function中加入正则化惩罚项的作用是降低model的复杂程度，增强其泛化能力（在测试集[未知环境]的表现能力）。记得第一次接触这个概念时，是看的Coursera上的一门《Machine Learning的课》，当时用于解释的图与吴恩达老师公开课上使用的类似，如下：</p>
+<blockquote>
+<p><img src="/2017/11/05/神经网络学习记录与总结/regularization explanation.jpg" alt="Regularization Explanation"></p>
+</blockquote>
+<p>解释中，在损失函数中加入正则化项后，能让最终模型从model3（图3）转为model2（图2），也正是因为说明，我的理解就一直存在误区，认为正则化惩罚项的目的是降低模型中高维度项的参数值，低复杂度等价于用低维度项来进行拟合。</p>
+<p>看了公开课中关于正则化的解释后（<a href="http://cs231n.github.io/linear-classify/#loss" target="_blank" rel="external">直达链接</a>），特别是L1 Regularization与L2 Regularization的对比，发现与之前的理解存在矛盾。L1的目的是希望特征影响稀疏化，L2的目的是希望特征影响平均化，这两者加入目标函数中都不能使得model训练向低维度特征的稀疏化发展（L1可能导致高维度特征被保留、L2排斥这种稀疏化结果）。</p>
+<p>经过自我探索，对这一块的认知有了新的理解，总结如下：模型的简单化是指参数的大小综合下降，而不是从维度上用更低次的项去拟合（L1与L2等Regularization方式都能达到该目的）；实际中，有些场景希望能用较少的特征来解释实际现象（倾向于用L1）,有些场景则希望尽量用上所有的特征（倾向于用L2），此时就需要根据经验来选取。</p>
+<font color="red">补充：降维以消除过拟合是从特征个数的角度出发（在考虑加入哪些特征时考虑的事情），而不是针对幂级数高低</font>
+
+<blockquote>
+<p>PS：参数值的综合减小会使得模型更加简单（Linear Model中表现为曲线更加平缓），而不是高次项的参数比重减小。下图中，使用线性分类器做分类，在损失函数中加入L2正则化项，得到蓝线（y=49.7x + 0.159x^2 + 0.002x^3，较低的正则化超参）与红线（y=2.581x + 0.157x^2 + 0.008x^3，较高的正则化超参），发现参数综合值较低的曲线（红线）更加平缓，但高次项不一定更低。</p>
+<p><img src="/2017/11/05/神经网络学习记录与总结/example-regularization.jpg" alt="Example Regularization"></p>
+</blockquote>
+<p>给出一个对过拟合/欠拟合、方差/偏差解释较全面的博客（<a href="http://blog.csdn.net/hurry0808/article/details/78148756" target="_blank" rel="external">直达链接</a>），里面的解释中最让我受益的是随着model complexity的增加，在测试集上的表现为：variance逐渐增加，bias先减小后增加。起初，模型类似于随机预测（under-fitting），故在训练集、测试集上的预测都不会太好，因此bias大，但预测很稳定（所有的预测值差距不大），故variance都小；随着模型复杂程度的增加，模型挖掘数据内在分布的能力逐渐提高，因此在训练集与测试集上的bias都变小，但预测的点的差异化也逐渐表露，故variance增加；当模型复杂程度进一步增加时（over-fitting），模型较依赖于训练数据，训练集毕竟只是真实情况的一个采样（与真实情况存在一定差异），故在训练集上的bias虽然继续减小，但在测试集上的bias却增加了，此时variance因预测点的差异化的提高而继续增加。</p>
 
             
         
@@ -374,7 +393,7 @@ $(document).ready(function(){
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
             <li class="title-link"><a href="javascript:;" class="toTop">神经网络学习历程推荐</a></li>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-BLOG"><span class="toc-text">1.BLOG</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1零基础入门深度学习"><span class="toc-text">1.1零基础入门深度学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#已看完"><span class="toc-text">已看完</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#未看完"><span class="toc-text">未看完</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-实现"><span class="toc-text">2.实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1参考材料"><span class="toc-text">2.1参考材料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2实现记录"><span class="toc-text">2.2实现记录</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-BLOG"><span class="toc-text">1.BLOG</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1零基础入门深度学习"><span class="toc-text">1.1零基础入门深度学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#已看完"><span class="toc-text">已看完</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#未看完"><span class="toc-text">未看完</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-实现"><span class="toc-text">2.实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1参考材料"><span class="toc-text">2.1参考材料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2实现记录"><span class="toc-text">2.2实现记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-公开课"><span class="toc-text">3.公开课</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-学习笔记1——正则化"><span class="toc-text">3.1 学习笔记1——正则化</span></a></li></ol></li></ol>
         </div>
     </div>
 

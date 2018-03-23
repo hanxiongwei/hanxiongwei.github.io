@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <title> Introduction_MCTS（未写完） · Essay_Han Xiongwei </title>
+    <title> GUROBI Example Introduction · Essay_Han Xiongwei </title>
     <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
@@ -22,7 +22,7 @@
 
 
 
-    <meta name="keywords" content="Tree Search, A*, MCTS, Nlvi" />
+    <meta name="keywords" content="GUROBI, Example Explanation, Principle，Python, Nlvi" />
 
 <link rel="stylesheet" href="/style/style.css">
 <script src="/script/jquery.min.js"></script>
@@ -212,23 +212,23 @@
     <article class="post">
         <header class="post-header">
             <div class="post-time syuanpi riseIn-light back-1">
-                <span>2017年11月1日</span>
+                <span>2018年3月19日</span>
                 
             </div>
             <h1 class="post-title syuanpi riseIn-light back-2">
             
-                Introduction_MCTS（未写完）
+                GUROBI Example Introduction
             
             </h1>
             
                 
                     <div class="post-tags syuanpi riseIn-light back-3">
                     
-                        <a href="/tags/Tree-Search/">Tree Search</a>
+                        <a href="/tags/GUROBI/">GUROBI</a>
                     
-                        <a href="/tags/A/">A*</a>
+                        <a href="/tags/Example-Explanation/">Example Explanation</a>
                     
-                        <a href="/tags/MCTS/">MCTS</a>
+                        <a href="/tags/Principle，Python/">Principle，Python</a>
                     
                     </div>
                 
@@ -236,19 +236,42 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>最近在做一个Monte Carlo Tree Search的调研，这几年强化学习的热潮使得该算法大放光彩，我们在Alpha Go与Alpha Zero中也见识了它的强大。这篇总结本着存在必有其原因的思想，刨了下树搜索的发展历史，从发展中探讨MCTS的优点，也算是对自己这段时间调研的一个记录。</p>
+                <p><a href="http://www.gurobi.com/index" target="_blank" rel="external">GUROBI</a>是现阶段求解效率最高的商业最优化求解Solver，与之类似的还有CPLEX、LpSolve、Lingo等，介于研究生与实习期间对该类Solver接触较多，了解到合理使用Solver对求解效率的影响之大，故希望通过这篇博客来一一实现官网的案例（Python版本），对一些运筹学理论进行诠释，并给出一些自己对理论与Solver API的理解。代码使用jupyter重写（.ipynb文件），方便对模块进行解释并演示，详见<a href="https://github.com/hanxiongwei/documents/tree/master/GUROBI_Codes_Analysis" target="_blank" rel="external">代码</a>。</p>
 <a id="more"></a>
-<h1 id="Tree-Search"><a href="#Tree-Search" class="headerlink" title="Tree Search"></a>Tree Search</h1><p>树搜索模型在MIP、GO、Constructive Algorithm、Search Engine等领域有广泛的应用，这里我把TS总结为如下过程：<br><img src="/2017/11/01/Introduction-MCTS/tree_search_image.jpg" alt="tree-search-introduction-image"></p>
+<h1 id="1-A-few-simple-applications"><a href="#1-A-few-simple-applications" class="headerlink" title="1. A few simple applications"></a>1. A few simple applications</h1><h2 id="facility-py"><a href="#facility-py" class="headerlink" title="facility.py"></a><a href="http://www.gurobi.com/documentation/7.5/examples/facility_py.html" target="_blank" rel="external">facility.py</a></h2><p>问题背景是运筹学中经典的<a href="https://en.wikipedia.org/wiki/Facility_location_problem" target="_blank" rel="external">UFLP(Uncapacitated facility location Problem)</a>，下图给出wiki上的介绍：</p>
 <blockquote>
-<p><strong>Tree Search</strong><br>存在一个Search Queue（SQ）储存待探索的节点，根据一定策略，每次选取一个节点进行探索，探索过程中会产生一些新的节点，更新SQ（将产生的新节点插入到SQ中），如此反复，直到满足终止条件<br>反复操作的结果是搜索树被不断完善，好的Select Strategy能加速搜索到optima的速度，结合剪枝策略（缩小搜索空间），进一步提高搜索效率<br>剪枝（prune）：当前节点的评估值差于整棵树已搜索到的最优值时，则放弃当前节点的后续探索步骤，将当前节点及其后续分支从树中剪掉，称为剪枝（PS：小明到酱油店间新修了一条路，他决定尝试是否能更快的到达目的地，历史上他走旧路需花30mins，如今他新路还未走完，所花时间已超过30mins，则可断定新路一定劣于旧路，即可放弃后续探索过程）</p>
-<p><img src="/2017/11/01/Introduction-MCTS/ts_prune_example.jpg" alt="tree-search-prune"></p>
+<p><img src="/2018/03/19/GUROBI-Example-Introduction/CFLP_wiki.jpg" alt="Uncapacitated facility location_wiki"></p>
+<p>大致解释：<br>① 该问题是调度问题的拓展，在需求一定要满足的前提下，决策选择哪些供应点，以保证总成本最小化。总成本中包含固定成本与运输成本，一旦供应点被选作供应，就需付出定额的固定成本，运输成本则来自于供应点到需求点的运输。<br>② 模型中各工厂的需求量一定，都为单位1；变量u表示供给点的最大供应量，其供应不能超过自身能力上限。<br>③ GUROBI程序中描述的问题与之差别为各需求点的需求有差异，且未归一化到1。<br>④ 该问题中，需求侧与供给侧的供应关系为full-connected，实际中可能是semi-connected，或涉及物品的种类不止一种等等，这些都属于问题的变种。</p>
 </blockquote>
-<h2 id="Uninformed-Search"><a href="#Uninformed-Search" class="headerlink" title="Uninformed Search"></a>Uninformed Search</h2><p>Uniformed Search不从环境中获取信息，属于较笨的搜索方式，树搜索中常见的类别有BFS(广度优先搜索)、DFS（深度优先搜索），这里用两张图简要回忆一下这两种搜索方式（序号表示搜索顺序）：<br><img src="/2017/11/01/Introduction-MCTS/bfs_dfs.jpg" alt="Bfs-and-Dfs"></p>
-<h2 id="Informed-Search"><a href="#Informed-Search" class="headerlink" title="Informed Search"></a>Informed Search</h2><p>利用环境信息，辅助树搜索过程，提高搜索效率。这里我以A star算法举例说明：A star算法也是一种树搜索模型，常用于图论中最短路径问题；介绍时，我依以该经典问题作为背景方便理解，实际拓展中，自定义评估函数g(n)、h(n)（下文会介绍）即可用于其他场景。</p>
+<p>原代码在实现中，建立好model后，找到固定成本最高的供给点，让其初始状态为closed，再进行模型求解，为了研究设计初始值的意义及拓展问题，我做了三组实验。</p>
+<p>实验一为不添加任何初始条件，直接对问题进行求解，求解结果如下（行表示plant，列表示warehouse）：</p>
+<p><img src="/2018/03/19/GUROBI-Example-Introduction/CFLP_sol_one.jpg" alt="CFLP_sol_one"></p>
+<p>结果中可看出，最优的选址与配送方案中，plant-2被关闭，而它恰巧是固定成本最高的供给点，因此原代码在求解前将plant-2的初值设为closed，对结果定无影响。因此在第二组实验中，将固定成本最小的plant-0的初值设为closed，其他供给点则设为open，再次进行求解，结果如下：</p>
+<p><img src="/2018/03/19/GUROBI-Example-Introduction/CFLP_sol_two.jpg" alt="CFLP_sol_two"></p>
+<p>结果与实验一相同，原因在于初值的设立未改变决策变量的可取范围，故不影响模型的最终求解，而只影响求解过程。GUROBI会根据送入的初值，构建一个可行解，并用该可行解作为Branch and Bound中的初始Bound，Bound较好则可加速Branch and Bound的剪枝过程，提升求解效率（关于B&amp;B算法的解释，可参考<a href="https://hanxiongwei.github.io/2017/10/28/Introduction-To-Operation-Research/#5-MIP-Solver-Core" target="_blank" rel="external">MIP Solver Core</a>）。我对两次实验的求解时间做了比较，差距不明显（52ms vs 63ms），原因在于问题规模较小，提速不明显。</p>
+<p>现实生活中，由于某些不可抗因素，某些供应点需要强行关闭。针对这一类情况，我设计了实验三，随机选取一个供应点，强制让其在model求解中处于closed状态（前提是剩余的总供应不小于总需求，否则model无解），实现方式有两种：①为变量添加新约束，让其小于等于0；②将决策变量（BINARY类型）的UB设置为0。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 假设plant-0被选为不采用</span></div><div class="line"><span class="comment"># 方式一：</span></div><div class="line">m3.addConstr(open[p] &lt;= <span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment"># 方式二：</span></div><div class="line">open[p].UB = <span class="number">0.0</span></div></pre></td></tr></table></figure></p>
+<p>当plant-1需关闭时，此时model的最优解中，plant-1的状态为closed，总成本上升，求解结果如下：</p>
+<p><img src="/2018/03/19/GUROBI-Example-Introduction/CFLP_sol_three.jpg" alt="CFLP_sol_three"></p>
 <blockquote>
-<p><strong>A star</strong><br>每个节点i保存两个信息：①g(i)记录start node到i的实际最短距离（已发生） ②h(i)记录i到end node的评估距离（未发生）<br>在Search Queue（SQ）中选取探索节点的策略为min{f(n)}，其中f(n)=g(n)+h(n)；由定义可知，f(n)用于衡量当前节点的总体评估距离，即利用了已发生的信息，同时利用了未知的预测信息<br>优点：算法灵活性高①当h(n)小于actual distance(n,end node)时，搜索的点较多，搜索范围较大，找到global optima的概率增大，但搜索效率较低（A star的prune也是以f(n)作为评估，h(n)较小时，节点被剪枝的可能性降低）；反之当h(n)大于actual distance(n,end node)时，搜索效率虽然提高，但更多时候搜索到的仅仅是local optima ②经典的A star算法中h(n)是静态的，实际中可将之设计为动态，随着搜索过程的进行，环境信息的增加，更新h(n)，提高后续搜索效率<br>缺点：①算法对h(n)的设计具有较强依赖性，h(n)与实际值越接近，算法搜索到global optimal的总体效率越大 ②不能保证一定搜索到global optimal</p>
+<p><strong>补充<1></1></strong><br>model.write()：该语句能将输入到GUROBI中的model进行输出，便于调试；输出的格式有多种（不同格式对应model中的不同内容），使用较多的是lp文件，它可输出model的数学表达式，如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">m1.write(<span class="string">'facility_p1.lp'</span>)</div></pre></td></tr></table></figure></p>
+<p>输出内容：</p>
+<p><img src="/2018/03/19/GUROBI-Example-Introduction/CFLP_model.jpg" alt="CFLP_model"></p>
+<p><strong>补充<2></2></strong><br>构建约束时尽量避免等式约束，有时目标的优化方向会让约束自动向等号逼近（如问题中对各供给点的供应量）</p>
+<p><strong>补充<3></3></strong><br>原程序中，将model的Method参数设置为2，这是在MIP求解中改变对root node的松弛问题的求解方式，与之相似的参数还有NodeMethod，之后会作为一个专门的专题来讲解。</p>
 </blockquote>
-<h1 id="Monte-Carlo-Tree-Search"><a href="#Monte-Carlo-Tree-Search" class="headerlink" title="Monte Carlo Tree Search"></a>Monte Carlo Tree Search</h1>
+<h1 id="2-Illustrating-specific-features"><a href="#2-Illustrating-specific-features" class="headerlink" title="2. Illustrating specific features"></a>2. Illustrating specific features</h1><h2 id="sensitivity-py"><a href="#sensitivity-py" class="headerlink" title="sensitivity.py"></a><a href="http://www.gurobi.com/documentation/7.5/examples/sensitivity_py.html" target="_blank" rel="external">sensitivity.py</a></h2><p>灵敏性分析侧重于研究模型不确定性对输出结果的影响，不确定性包括多类，有变量不确定性、常量（资源限量、价值常量…）不确定性、约束不确定性等等，这在研究模型鲁棒性、模型各模块与输出的关系等上十分重要。先抛出wiki上的介绍，<a href="https://en.wikipedia.org/wiki/Sensitivity_analysis" target="_blank" rel="external">链接直达</a>：</p>
+<blockquote>
+<p><img src="/2018/03/19/GUROBI-Example-Introduction/sensitivity_wiki.jpg" alt="Sensitivity Analysis"></p>
+</blockquote>
+<p>不确定性情况发生时，较直观的想法是修改模型，重新求解。这对复杂的模型很不友好，因反复重新求解需要消耗大量时间。使用GUROBI的好处在于，对模型做部分修改并再次优化时，它能基于上次优化的结果继续求解（原理猜想：基于heuristic，将原模型的最优解修复为增加不确定性后新模型的可行解，得到较好的Upper Bound[in Minimize Problem]，加速Branch and Bound求解过程中的剪枝），快速反映结果，提升效率。</p>
+<p>本代码主要研究如何通过GUROBI对决策变量做灵敏度分析，主要关注的决策变量类型为BINARY，BINARY在分析时相对较简单，因为它的取值范围仅有两类，分析时候仅需将0→1或1→0。<br>我采用’facility.py’中研究的模型作为输入，模型中BINARY变量为供应点的状态(1:open / 0:closed)，在模型求得最优解后，分别改变每个变量的取值，重新求解，观察值的改变对成本目标的影响。下图为最终分析结果：</p>
+<p><img src="/2018/03/19/GUROBI-Example-Introduction/SA_result.jpg" alt="Sensitivity Analysis Result"></p>
+<p>从中可以看出，plant-2与plant-4的状态变量的改变对成本目标函数的影响最小。</p>
+<blockquote>
+<p><strong>补充<1></1></strong><br>若需对INTEGER变量做灵敏性分析时，修改的方式与上述类似，通过改变BOUND（LB / UB）或者添加约束限制变量的取值范围。</p>
+<p><strong>补充<2></2></strong><br>在coding时，应尽量避免数值误差（虽然GUROBI在这一块已十分完善），如判断BINARY变量的取值是0还是1时，如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">open[plant]._origX &lt; <span class="number">0.5</span> <span class="comment"># True</span></div><div class="line">open[plant]._origX == <span class="number">0</span> <span class="comment"># False，计算得到的值可能是0.0000...00001</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+
             
         
         </div>
@@ -261,16 +284,10 @@
         
     <nav class="article-page">
         
-            <a href="/2017/11/05/神经网络学习记录与总结/" id="art-left" class="art-right">
-                <span class="next-title">
-                    神经网络学习历程推荐<i class="iconfont icon-right"></i> 
-                </span>
-            </a>
         
-        
-            <a href="/2017/10/28/Introduction-To-Operation-Research/" id="art-right" class="art-left">
+            <a href="/2018/03/13/Operation-Research-and-Machine-Learning/" id="art-right" class="art-left">
                 <span class="prev-title"> 
-                    <i class="iconfont icon-left"></i>Introduction To Operation Research
+                    <i class="iconfont icon-left"></i>Operation Research and Machine Learning
                 </span>
             </a>
         
@@ -367,8 +384,8 @@ $(document).ready(function(){
     <div class="post-toc">
         <span class="title">文章目录</span>
         <div class="toc-inner syuanpi back-1 fallIn-light">
-            <li class="title-link"><a href="javascript:;" class="toTop">Introduction_MCTS（未写完）</a></li>
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tree-Search"><span class="toc-text">Tree Search</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Uninformed-Search"><span class="toc-text">Uninformed Search</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Informed-Search"><span class="toc-text">Informed Search</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Monte-Carlo-Tree-Search"><span class="toc-text">Monte Carlo Tree Search</span></a></li></ol>
+            <li class="title-link"><a href="javascript:;" class="toTop">GUROBI Example Introduction</a></li>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-A-few-simple-applications"><span class="toc-text">1. A few simple applications</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#facility-py"><span class="toc-text">facility.py</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Illustrating-specific-features"><span class="toc-text">2. Illustrating specific features</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#sensitivity-py"><span class="toc-text">sensitivity.py</span></a></li></ol></li></ol>
         </div>
     </div>
 

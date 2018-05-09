@@ -236,9 +236,9 @@
         </header>
         <div class="post-content syuanpi riseIn-light back-3">
             
-                <p>实习期间研究的方向之一就是如何将machine learning的技术与运筹学结合，加速求解过程。依据这个突破点，外加自身对这一块有着浓厚的兴趣，故查阅了近几年结合的研究进展，发现在运筹学传统的技术上，一旦加上learning，就可以投较好的期刊或会议，如《A machine learning -based approximation of strong branching》——INFORMS Journal of Computing、《learning to search in branch and bound Algorithms》——NIPS…<br>不难看出，这一领域是未来的发展方向，因此将自己的理解、学习进展进行记录。</p>
+                <p>实习期间研究的方向之一就是如何将machine learning的技术与运筹学结合，加速求解过程，运用到华为供应链场景。依据这个突破点，外加自身对这一块有着浓厚的兴趣，故查阅了近几年结合的研究进展，发现在运筹学传统的技术上，一旦加上learning，就可以投较好的期刊或会议，如《A machine learning -based approximation of strong branching》——INFORMS Journal of Computing、《learning to search in branch and bound Algorithms》——NIPS…<br>不难看出，这一研究领域是未来学术界与业界的热门方向，因此本文将自身的理解、学习进展进行记录与分享。</p>
 <a id="more"></a>
-<h1 id="1-运筹学与机器学习的区别是什么？"><a href="#1-运筹学与机器学习的区别是什么？" class="headerlink" title="1.运筹学与机器学习的区别是什么？"></a>1.运筹学与机器学习的区别是什么？</h1><p>此问题是Noah实习面试中，leader的问题之一。当时我给出的回答是：“机器学习侧重于从数据中挖掘潜在分布，以响应未知领域，关键是拟合；运筹学则侧重于对问题的抽象，建立能精确描述问题的数学模型，并利用相关算法求得最优解。”leader追问：“机器学习问题也要建立数学模型，为什么它求得的总是有误差，是近似解，而运筹学中能求得最优解呢？导致这种差异的本质是什么呢？”说实话，我后来就有点懵圈…</p>
+<h1 id="1-运筹学与机器学习的区别是什么？"><a href="#1-运筹学与机器学习的区别是什么？" class="headerlink" title="1.运筹学与机器学习的区别是什么？"></a>1.运筹学与机器学习的区别是什么？</h1><p>此问题是Noah Lab实习面试中，leader的问题之一。当时我给出的回答是：“机器学习侧重于从数据中挖掘潜在分布，以响应未知领域，关键是拟合；运筹学则侧重于对问题的抽象，建立能精确描述问题的数学模型，并利用相关算法求得最优解。”leader追问：“机器学习问题也要建立数学模型，为什么它求得的总是有误差，是近似解，而运筹学中能求得最优解呢？导致这种差异的本质是什么呢？”说实话，我后来就有点懵圈…</p>
 <p>那时刚接触机器学习，侧重于了解算法。知道机器学习中的经典模型有逻辑回归、SVM、决策树，求解算法有梯度下降（逻辑回归）、最大信息增益（Tree model）、BP（神经网络）；运筹学中的经典模型有TSP、Knapsack、Bin Packing、Scheduling，求解算法则包括启发、元启发、超启发、精确解算法等等。当时没从结合上去理解，总觉得是截然不同的内容，了解深入后，才发现都是一个套路，万变不离其宗——数学。</p>
 <p>这里我先给出我的结论，后序做详细的解释：</p>
 <blockquote>
@@ -256,10 +256,10 @@
 <blockquote>
 <p>两者研究的问题基本都是NP-Hard问题，如运筹学中的TSP、Bin Packing等，机器学习领域中的KNN、Decision Tree Model等等。</p>
 </blockquote>
-<h2 id="1-2-算法层面"><a href="#1-2-算法层面" class="headerlink" title="1.2.算法层面"></a>1.2.算法层面</h2><p>我们在两个领域内总能听到不同的算法，运筹学中，需求得精确解时，线性规划中的单纯形法，整数规划中的DP、Branch and Bound、Cut-Plane算法往往听的比较多，求较优近似解时，则是进化算法、SA、Tabu Search等。而谈到机器学习，则有梯度下降、SMO、信息增益（ID3）、Lloyd Algorithm（KNN）等等。</p>
+<h2 id="1-2-算法层面"><a href="#1-2-算法层面" class="headerlink" title="1.2.算法层面"></a>1.2.算法层面</h2><p>我们在两个领域内总能听到不同的算法，运筹学中，当问题需求得精确解时，线性规划中的单纯形法，整数规划中的DP、Branch and Bound、Cut-Plane算法往往听的比较多，求较优近似解时，则是进化算法、SA、Tabu Search等。而谈到机器学习，则有梯度下降、SMO、信息增益（ID3）、Lloyd Algorithm（KNN）等等。</p>
 <p><strong>算法层面上，两个领域的知识是相通的，因为所有的算法其实无外乎两类，精确算法与近似算法。</strong></p>
 <blockquote>
-<p>补充：对各种算法进行划分时，需结合求解问题的背景，如问题的解空间为凸时，梯度下降法可求得全局最优解，属于精确算法；但解空间非凸时，梯度下降法仅能求得一个局部最优解，此时属于近似算法。</p>
+<p>补充：对各种算法进行划分时，需结合求解问题的背景，如问题的解空间为凸时，梯度下降法可求得全局<br>，属于精确算法；但解空间非凸时，梯度下降法仅能求得一个局部最优解，此时属于近似算法。</p>
 </blockquote>
 <p><strong>精确算法是聪明的暴力搜索，指导好的搜索方向，当搜索到劣质的解空间时，及时制止。</strong></p>
 <p>精确算法在机器学习领域中听的比较少，原因在于问题规模往往较大（数据量大），在有限的计算资源下，很难求得最优解，因此近似优化算法居多，更多的研究方向在于针对特定的模型，如何改进优化算法，使求得的解更好。常用的思路是增加算法的随机性，在收敛能力与随机上做好trade-off，随机性的带入能在搜索中辅助跳出局部最优，但随机性过多带入会导致算法的搜索能力较弱，与random searching无异。这里给出一篇网上的博客<a href="https://blog.csdn.net/shuzfan/article/details/75675568" target="_blank" rel="external">《梯度下降优化算法总结》</a>，介绍梯度下降法的改进策略，便于理解上述提到的trade-off。</p>
@@ -271,7 +271,7 @@
 <h2 id="1-3-小结"><a href="#1-3-小结" class="headerlink" title="1.3.小结"></a>1.3.小结</h2><ol>
 <li><p>机器学习与运筹学的主要区别？——先验知识的强弱。</p>
 </li>
-<li><p>机器学习问题结果为什么总存在误差，运筹学却能求得精确解？——先要明确有误差不等同于没找到精确解，且运筹学中也会存在误差。机器学习中，当数据量较大时，难以求得精确解，会造成误差，但即使求得了精确解，误差也是存在的。原因在于先验知识的缺少导致问题从数据建模（按先验知识给定的模型与实际可能存在一定差距），并且用模型做泛化时，未知信息进一步增加，这些都是导致误差的原因。运筹学的模型是从解的结构出发，约束能正确描述解空间的区域，求得精确解，但该解不一定是实际需求完全对应（问题的抽象可能存在一定误差），复杂问题的规模较大，可能得不到最优解决，因此存在误差也是可能的。</p>
+<li><p>机器学习问题结果为什么总存在误差，运筹学却能求得精确解？——先要明确有误差不等同于没找到精确解，且运筹学中也会存在误差。机器学习中，当数据量较大时，难以求得精确解，会造成误差，但即使求得了精确解，误差也是存在的。原因在于先验知识的缺少导致问题从数据建模（按先验知识给定的模型与实际可能存在一定差距），并且用模型做泛化时，未知信息进一步增加，这些都是导致误差的原因。运筹学的模型是从解的结构出发，约束能正确描述解空间的区域，求得精确解，但该解不一定是实际需求完全对应（问题的抽象可能存在一定误差），复杂问题的规模较大，可能得不到最优解（MIP-Gap），因此存在误差也是可能的。</p>
 </li>
 <li><p>复杂度层面，机器学习的规模来源于庞大的训练数据，运筹学则来源于问题描述的复杂度（大量约束、复杂目标…），求解算法的设计套路类似。</p>
 </li>
@@ -289,7 +289,7 @@
 <p>再来说b，当问题的变量、约束较多时，解空间过大，在有限的计算资源下，精确解算法很难求得最优解，因此一般的Solver都会提供提前终止搜索的接口，如Time Limit或者Max Gap（Upper Bound与Lower Bound之间的差距小于给定阈值时停止搜索），此时求得的解也不是全局最优解。</p>
 <h2 id="2-2-较优可行解"><a href="#2-2-较优可行解" class="headerlink" title="2.2.较优可行解"></a>2.2.较优可行解</h2><p><strong>较优可行解的求解方式灵活很多，但得不到Bound的它就没有终极目标——一只努力拼搏却缺乏一丝灵魂的奋斗者。</strong></p>
 <p>上述已提到过近似算法的设计核心，即收敛能力与随机性之间的权衡。较优可行解往往在工业界接受的比较多，企业更多的关心是当前算法比前一版本提高程度，同时，技术人员的最优与业务人员的最优往往存在差异。</p>
-<h1 id="3-Machine-Learning与Operation-Research结合举例"><a href="#3-Machine-Learning与Operation-Research结合举例" class="headerlink" title="3.Machine Learning与Operation Research结合举例"></a>3.Machine Learning与Operation Research结合举例</h1><p><strong>哪里有开销大的地方，哪里就可尝试使用learning做近似，训练一个evaluation function</strong></p>
+<h1 id="3-Machine-Learning与Operation-Research结合举例"><a href="#3-Machine-Learning与Operation-Research结合举例" class="headerlink" title="3.Machine Learning与Operation Research结合举例"></a>3.Machine Learning与Operation Research结合举例</h1><p><strong>哪里有计算开销大的地方，哪里就可尝试使用learning做近似，训练一个evaluation function</strong></p>
 <h2 id="3-1-In-Exact-Algorithm"><a href="#3-1-In-Exact-Algorithm" class="headerlink" title="3.1.In Exact Algorithm"></a>3.1.In Exact Algorithm</h2><ol>
 <li><p>Branch and Bound中，好的树节点搜索顺序能使得Bound收敛的更快，加速剪枝过程，从而提高求解效率，传统的方法有广度优先、深度优先等，《learning to search in branch and bound Algorithms》则学得一个自适应的searching order。</p>
 </li>
@@ -303,9 +303,9 @@
 </li>
 </ol>
 <h2 id="3-2-In-Heuristic-Algorithm"><a href="#3-2-In-Heuristic-Algorithm" class="headerlink" title="3.2.In Heuristic Algorithm"></a>3.2.In Heuristic Algorithm</h2><ol>
-<li>《Small Boxes Big Data: A Deep Learning Approach to Optimize Variables Sezed Bin Packing》中，用neural network训练一个分类器，输出对当前算例所执行的最好的启发式算法的编号（训练数据中实现了八种启发式算法，以最优算法编号作为label）。</li>
+<li>《Small Boxes Big Data: A Deep Learning Approach to Optimize Variables Sized Bin Packing》中，用neural network训练一个分类器，输出对当前算例所执行的最好的启发式算法的编号（训练数据中实现了八种启发式算法，以最优算法编号作为label）。</li>
 </ol>
-<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://www.zhihu.com/question/24976006" target="_blank" rel="external">机器学习的算法和普通《算法导论》里的算法有什么本质上的异同？</a><br><a href="https://www.zhihu.com/question/24720853" target="_blank" rel="external">运筹学与最优化有什么关系？</a><br><a href="http://www.sohu.com/a/212747871_717210" target="_blank" rel="external">深度学习如何影响运筹学？</a></p>
+<h1 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h1><p><a href="https://www.zhihu.com/question/24976006" target="_blank" rel="external">机器学习的算法和普通《算法导论》里的算法有什么本质上的异同？</a><br><a href="https://www.zhihu.com/question/24720853" target="_blank" rel="external">运筹学与最优化有什么关系？</a><br><a href="https://www.zhihu.com/question/65151551/answer/243104981" target="_blank" rel="external">深度学习如何影响运筹学？</a></p>
 
             
         

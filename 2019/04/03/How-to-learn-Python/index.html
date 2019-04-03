@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title> How to learn Python · Essay_Han Xiongwei </title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="browsermode" content="application">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Essay_Han Xiongwei">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="msapplication-navbutton-color" content="#666666">
+<meta name= "format-detection" content="telephone=no" />
+<meta name="keywords" content="nlvi, Nlvi" />
+
+    <link rel="apple-touch-icon"  sizes="72x72"  href="/images/bg_index_1.JPG">
+    <link rel="apple-touch-icon-precomposed"  sizes="72x72"  href="/images/bg_index_1.JPG">
+
+
+
+    <meta name="description" content="学术汪的小本本">
+
+
+
+    <meta name="keywords" content="Python, Study method, Nlvi" />
+
+<link rel="stylesheet" href="/style/style.css">
+<script src="/script/jquery.min.js"></script>
+<script>
+    var CONFIG = {
+        title: "Essay_Han Xiongwei",
+        author: "Han Xiongwei",
+        lightbox: true,
+        animate: true
+    }
+</script>
+
+
+
+    <link rel="stylesheet" href="/lightbox/css/lightbox.min.css">
+
+
+
+
+    <link rel="stylesheet" href="/syuanpi/syuanpi.min.css">
+
+
+
+
+    <link rel="icon" href="/images/bg_index_1.JPG">
+
+
+
+
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+<body>
+    <div class="progress">
+    <div class="progress-inner"></div>
+</div>
+    <div class="body">
+    <div class="tagcloud-mask"></div>  
+<div class="tagcloud" id="tagcloud">
+    <div class="tagcloud-inner">
+        <a href="/tags/A/" style="font-size: 14px;">A*</a> <a href="/tags/Bender-Decomposition/" style="font-size: 14px;">Bender Decomposition</a> <a href="/tags/Bootstrap/" style="font-size: 14px;">Bootstrap</a> <a href="/tags/CMS/" style="font-size: 14px;">CMS</a> <a href="/tags/Column-Generation/" style="font-size: 14px;">Column Generation</a> <a href="/tags/Example-Explanation/" style="font-size: 14px;">Example Explanation</a> <a href="/tags/Experience/" style="font-size: 14px;">Experience</a> <a href="/tags/GUROBI/" style="font-size: 14px;">GUROBI</a> <a href="/tags/Inner-connection/" style="font-size: 14px;">Inner-connection</a> <a href="/tags/MCTS/" style="font-size: 14px;">MCTS</a> <a href="/tags/MIP-Solver-Core/" style="font-size: 14px;">MIP Solver Core</a> <a href="/tags/Machine-Learning/" style="font-size: 14px;">Machine Learning</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Neural-Network/" style="font-size: 14px;">Neural Network</a> <a href="/tags/Operation-Research/" style="font-size: 14px;">Operation Research</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/Principle，Python/" style="font-size: 14px;">Principle，Python</a> <a href="/tags/Project/" style="font-size: 14px;">Project</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Servers-Configuration/" style="font-size: 14px;">Servers Configuration</a> <a href="/tags/Simplex-Method/" style="font-size: 14px;">Simplex Method</a> <a href="/tags/Skill/" style="font-size: 14px;">Skill</a> <a href="/tags/Study-method/" style="font-size: 14px;">Study method</a> <a href="/tags/Summary/" style="font-size: 14px;">Summary</a> <a href="/tags/Tree-Search/" style="font-size: 14px;">Tree Search</a> <a href="/tags/Website-Design/" style="font-size: 14px;">Website Design</a>
+    </div>
+</div>
+    <header class="header" id="header">
+    <div class="title syuanpi tvIn">
+    <div class="table">
+        <div class="connect">
+            <div class="connect-inner">
+                <span><a href="/">Essay_Han Xiongwei</a></span>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <nav class="main-nav syuanpi tvIn">
+<div class="table">
+
+    <ul class="menu">
+        
+        
+        
+            <li class="menu-item">
+                <a href="/">
+                    <span>文章</span>
+                    
+                        <span class="menu-item-label">article</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/archives">
+                    <span>归档</span>
+                    
+                        <span class="menu-item-label">archives</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="javascript:;" id="tags">
+                    <span>标签</span>
+                    
+                        <span class="menu-item-label">tags</span>
+                    
+                </a>
+            </li>
+        
+        
+        
+            <li class="menu-item">
+                <a href="/about">
+                    <span>关于</span>
+                    
+                        <span class="menu-item-label">about</span>
+                    
+                </a>
+            </li>
+        
+        
+    </ul>
+
+</div>
+</nav>
+</header>
+<div class="mobile-header">
+    <div class="mobile-header-body">
+        <div class="mobile-header-list">
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/">
+                        <span>文章</span>
+                        
+                            <span class="menu-item-label">article</span>
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/archives">
+                        <span>归档</span>
+                        
+                            <span class="menu-item-label">archives</span>
+                        
+                    </a>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item inner-cloud">
+                    <div class="mobile-nav-tag">
+                        <a href="javascript:;" id="mobile-tags">
+                            <span>标签</span>
+                            
+                                <span class="menu-item-label">tags</span>
+                            
+                        </a>
+                    </div>
+                    <div class="mobile-nav-tagcloud">
+                        <div class="mobile-tagcloud-inner">
+                            <a href="/tags/A/" style="font-size: 14px;">A*</a> <a href="/tags/Bender-Decomposition/" style="font-size: 14px;">Bender Decomposition</a> <a href="/tags/Bootstrap/" style="font-size: 14px;">Bootstrap</a> <a href="/tags/CMS/" style="font-size: 14px;">CMS</a> <a href="/tags/Column-Generation/" style="font-size: 14px;">Column Generation</a> <a href="/tags/Example-Explanation/" style="font-size: 14px;">Example Explanation</a> <a href="/tags/Experience/" style="font-size: 14px;">Experience</a> <a href="/tags/GUROBI/" style="font-size: 14px;">GUROBI</a> <a href="/tags/Inner-connection/" style="font-size: 14px;">Inner-connection</a> <a href="/tags/MCTS/" style="font-size: 14px;">MCTS</a> <a href="/tags/MIP-Solver-Core/" style="font-size: 14px;">MIP Solver Core</a> <a href="/tags/Machine-Learning/" style="font-size: 14px;">Machine Learning</a> <a href="/tags/MySQL/" style="font-size: 14px;">MySQL</a> <a href="/tags/Neural-Network/" style="font-size: 14px;">Neural Network</a> <a href="/tags/Operation-Research/" style="font-size: 14px;">Operation Research</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/Principle，Python/" style="font-size: 14px;">Principle，Python</a> <a href="/tags/Project/" style="font-size: 14px;">Project</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a> <a href="/tags/Servers-Configuration/" style="font-size: 14px;">Servers Configuration</a> <a href="/tags/Simplex-Method/" style="font-size: 14px;">Simplex Method</a> <a href="/tags/Skill/" style="font-size: 14px;">Skill</a> <a href="/tags/Study-method/" style="font-size: 14px;">Study method</a> <a href="/tags/Summary/" style="font-size: 14px;">Summary</a> <a href="/tags/Tree-Search/" style="font-size: 14px;">Tree Search</a> <a href="/tags/Website-Design/" style="font-size: 14px;">Website Design</a>
+                        </div>
+                    </div>
+                </div>
+            
+            
+            
+                <div class="mobile-nav-item">
+                    <a href="/about">
+                        <span>关于</span>
+                        
+                            <span class="menu-item-label">about</span>
+                        
+                    </a>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div class="mobile-header-nav">
+        <div class="mobile-header-item" id="mobile-left">
+            <div class="header-menu-item">
+                <span class="header-menu-line"></span>
+            </div>
+        </div>
+        <h1 class="mobile-header-title">
+            <a href="/">Essay_Han Xiongwei</a>
+        </h1>
+        <div class="mobile-header-item"></div>
+    </div>
+</div>
+
+    <div class="container">
+        <main class="main" id="main">
+            
+    
+    <article class="post">
+        <header class="post-header">
+            <div class="post-time syuanpi riseIn-light back-1">
+                <span>2019年4月3日</span>
+                
+            </div>
+            <h1 class="post-title syuanpi riseIn-light back-2">
+            
+                How to learn Python
+            
+            </h1>
+            
+                
+                    <div class="post-tags syuanpi riseIn-light back-3">
+                    
+                        <a href="/tags/Python/">Python</a>
+                    
+                        <a href="/tags/Study-method/">Study method</a>
+                    
+                    </div>
+                
+            
+        </header>
+        <div class="post-content syuanpi riseIn-light back-3">
+            
+                <p>在CITYU-商学院-Management Science做RA时，主要任务是inventory与pricing等方面的coding工作，对应paper中的实验部分。该领域科研工作主要侧重点在于理论，期望结合问题的性质，给出model及optimal policy等；但在data-driven的趋势下，老板认为学生应该加强coding工作，故期望我分享如何学习编程，面向的对象为他的博士生。在这一背景下，完成了该slides。</p>
+<p>Slides是我对自己编程学习的总结，抛开厚厚的书本，放弃“打开第一章”的动作，本着实用性的角度出发。</p>
+<a id="more"></a>
+<h1 id="1-What-is-Python？"><a href="#1-What-is-Python？" class="headerlink" title="1. What is Python？"></a>1. What is Python？</h1><p><img src="/2019/04/03/How-to-learn-Python/page1-1.jpg" alt="page1-1"></p>
+<p><img src="/2019/04/03/How-to-learn-Python/page1-2.jpg" alt="page1-2"></p>
+<blockquote>
+<p>[统计来源]: <a href="https://www.tiobe.com/tiobe-index/" target="_blank" rel="external">https://www.tiobe.com/tiobe-index/</a></p>
+</blockquote>
+<p><img src="/2019/04/03/How-to-learn-Python/page1-3.jpg" alt="page1-3"></p>
+<blockquote>
+<p>[Python-Wiki]: <a href="https://en.wikipedia.org/wiki/Python_(programming_language" target="_blank" rel="external">https://en.wikipedia.org/wiki/Python_(programming_language</a>)</p>
+<p>[作者Wiki]: <a href="https://en.wikipedia.org/wiki/Guido_van_Rossum" target="_blank" rel="external">https://en.wikipedia.org/wiki/Guido_van_Rossum</a></p>
+<p>他从著名英国喜剧团体Monty Python（巨蟒）身上得到了灵感，他本人也是该剧团的铁杆粉丝</p>
+</blockquote>
+<p><img src="/2019/04/03/How-to-learn-Python/page1-4.jpg" alt="page1-4"></p>
+<blockquote>
+<p>[图片来源]: <a href="https://Itw01.com/4RSDEGA.html" target="_blank" rel="external">https://Itw01.com/4RSDEGA.html</a></p>
+<p>脚本语言每次运行都需要走完全部的运作流程edit-compile-link-run，特点就是interpreted</p>
+</blockquote>
+<p><img src="/2019/04/03/How-to-learn-Python/page1-5.jpg" alt="page1-5"></p>
+<h1 id="2-Python从小白到入门"><a href="#2-Python从小白到入门" class="headerlink" title="2. Python从小白到入门"></a>2. Python从小白到入门</h1><p><img src="/2019/04/03/How-to-learn-Python/page2-1.jpg" alt="page2-1"></p>
+<p><img src="/2019/04/03/How-to-learn-Python/page2-2.jpg" alt="page2-2"></p>
+<blockquote>
+<p>[conda VS pip]: <a href="https://stackoverflow.com/questions/20994716/what-is-the-difference-between-pip-and-conda" target="_blank" rel="external">https://stackoverflow.com/questions/20994716/what-is-the-difference-between-pip-and-conda</a></p>
+</blockquote>
+<p><img src="/2019/04/03/How-to-learn-Python/page2-3.jpg" alt="page2-3"></p>
+<p><img src="/2019/04/03/How-to-learn-Python/page2-4.jpg" alt="page2-4"></p>
+<blockquote>
+<p>标蓝的库为常用库，用anaconda安装Python后，默认也会被安装</p>
+</blockquote>
+<p><img src="/2019/04/03/How-to-learn-Python/page2-5.jpg" alt="page2-5"></p>
+<blockquote>
+<p>[知乎《深度学习的Python包对比》]: <a href="https://www.zhihu.com/question/29412143" target="_blank" rel="external">https://www.zhihu.com/question/29412143</a></p>
+<p>[PyFlux ArimaX introduction]: <a href="https://pyflux.readthedocs.io/en/latest/arimax.html#introduction" target="_blank" rel="external">https://pyflux.readthedocs.io/en/latest/arimax.html#introduction</a></p>
+<p>[强化学习，PyBrain]: <a href="http://pybrain.org/" target="_blank" rel="external">http://pybrain.org/</a></p>
+<p>并行计算的库一般已被集成到其他一些package里，但若是自己手动实现的代码，需自行添加</p>
+</blockquote>
+<h1 id="3-Python从入门到放弃"><a href="#3-Python从入门到放弃" class="headerlink" title="3. Python从入门到放弃"></a>3. Python从入门到放弃</h1><p>初学者看完第1、2章即可，后面的过程很难从编程中感受到快乐……</p>
+<p><img src="/2019/04/03/How-to-learn-Python/page3-1.jpg" alt="page3-1"></p>
+<p><img src="/2019/04/03/How-to-learn-Python/page3-2.jpg" alt="page3-2"></p>
+<p><img src="/2019/04/03/How-to-learn-Python/page3-3.jpg" alt="page3-3"></p>
+<p><img src="/2019/04/03/How-to-learn-Python/page3-4.jpg" alt="page3-4"></p>
+<h1 id="4-操作演示"><a href="#4-操作演示" class="headerlink" title="4. 操作演示"></a>4. 操作演示</h1><p><img src="/2019/04/03/How-to-learn-Python/page4-1.jpg" alt="page4-1"></p>
+<blockquote>
+<p>这里不好放演示内容，故通过文字简单介绍下：</p>
+<ol>
+<li>通过anaconda下载Python后，会自带下一个IDE，即spyder，个人觉得不够轻量级，所以推荐的IDE是微软的Visual Studio Code，下载地址为<a href="https://code.visualstudio.com/" target="_blank" rel="external">https://code.visualstudio.com/</a></li>
+<li>Jupyter Notebook是我非常喜欢的工具（将浏览器作为语言的IDE），类似于Matlab中的cmd，同时支持markdown的书写，可以让说明、公式、代码及每一代码块的运行结果出现在同一界面中，anaconda在安装好Python后也会自动将该工具安装好</li>
+<li>对于不确定的代码，通过Jupyter单步运行，确定性的代码则copy到Visual Studio Code中进行封装</li>
+</ol>
+<p>论和程序猿沟通的正确性</p>
+</blockquote>
+<h1 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h1><ol>
+<li>学习热情死于安装，但Python环境配置很简单，按上述介绍来即可</li>
+<li>学习语言的最好方式为快速了解基本语法，再结合自己想实现的task，多google即可，书本仅作为查询细节的工具</li>
+<li>多数童鞋想学习的Python的目的为数据处理与数据分析，对应Numpy、Pandas两个库函数，学会google里面输入“Pandas如何实现XXX功能”、“Numpy如何实现XXX功能”</li>
+</ol>
+<p><img src="/2019/04/03/How-to-learn-Python/page4-2.jpg" alt="page4-2"></p>
+
+            
+        
+        </div>
+        
+            
+            
+        
+    </article>
+    
+        
+    <nav class="article-page">
+        
+        
+            <a href="/2018/03/19/GUROBI-Example-Introduction/" id="art-right" class="art-left">
+                <span class="prev-title"> 
+                    <i class="iconfont icon-left"></i>GUROBI Example Introduction
+                </span>
+            </a>
+        
+    </nav>
+
+        
+    
+
+
+        </main>
+        <footer class="footer syuanpi fadeIn" id="footer">
+    <hr>
+    <div class="footer-wrapper">
+        <div class="left">
+            <div class="contact-icon">
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            <a href="https://github.com/hanxiongwei" class="iconfont icon-github" title="github"></a>
+        
+        
+        
+        
+        
+        
+        
+    
+</div>
+        </div>
+        <div class="right">
+            <div class="copyright">
+    <div class="info">
+        <span>&copy;</span>
+        <span>1970 ~ 2019</span>
+        <span>❤</span>
+        <span>Han Xiongwei</span>
+    </div>
+    <div class="theme">
+        <span>
+            动力来源于
+            <a href="http://hexo.io/" target="_blank">Hexo </a>
+        </span>
+        <span>
+            主题
+            <a href="https://github.com/ColMugX/hexo-theme-Nlvi"> Nlvi </a>
+        </span>
+    </div>
+    
+    <div class="visit_count">
+        <i class="iconfont icon-visit"></i>
+        <span id="busuanzi_value_site_uv"></span>
+        <i class="iconfont icon-people"></i>
+        <span id="busuanzi_value_site_pv"></span>
+    </div>
+    
+</div>
+        </div>
+    </div>
+</footer>
+    </div>
+    <script src="/script/nlvi.js"></script>
+<script src="/script/search.js"></script>
+
+    <script src="/lightbox/js/lightbox.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    document.body.addEventListener('touchstart', function () {});
+    $('.progress').hide();
+    $('.body').show();
+    Nlvi.tagcloud();
+    Nlvi.mobileHeader();
+    Nlvi.back2top();
+    Nlvi.smoothScroll();
+    Nlvi.onView();
+    Nlvi.showToc();
+    Nlvi.showComments();
+    Nlvi.showReward();
+    Nlvi.picPos();
+
+    !CONFIG.animate && Nlvi.offAnimate();
+    CONFIG.lightbox && Nlvi.onPicBox();
+})
+</script>
+    </div>
+    
+        
+    <div class="post-toc">
+        <span class="title">文章目录</span>
+        <div class="toc-inner syuanpi back-1 fallIn-light">
+            <li class="title-link"><a href="javascript:;" class="toTop">How to learn Python</a></li>
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-What-is-Python？"><span class="toc-text">1. What is Python？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Python从小白到入门"><span class="toc-text">2. Python从小白到入门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Python从入门到放弃"><span class="toc-text">3. Python从入门到放弃</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-操作演示"><span class="toc-text">4. 操作演示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-总结"><span class="toc-text">5. 总结</span></a></li></ol>
+        </div>
+    </div>
+
+    
+    <div class="backtop syuanpi dead toTop" id="backtop">
+    <i class="iconfont icon-up"></i>
+    <span style="text-align:center;font-family:Georgia;"><span style="font-family:Georgia;" id="scrollpercent">1</span>%</span>
+</div>
+    
+</body>
+</html>
